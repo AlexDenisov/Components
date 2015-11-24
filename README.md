@@ -14,7 +14,7 @@ Work in progress, here are two articles where you can find more information:
 
 ### Contribution
 
-If you liked the concept and want to contribute a Component be sure to read introductory articles and review existing Components in `Components.make` folder. The following are work-in-progress guidelines we adhere to we create Components.
+If you liked the concept and want to contribute a Component be sure to read introductory articles and review existing Components in `Components.make` folder. The following are work-in-progress guidelines we adhere to when we create Components.
 
 #### Precompiled binary package distribution is recommended
 

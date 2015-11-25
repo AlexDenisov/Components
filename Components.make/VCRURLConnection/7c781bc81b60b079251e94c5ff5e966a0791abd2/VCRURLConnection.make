@@ -1,0 +1,72 @@
+NAME=VCRURLConnection
+# VERSION=0.2.0 # Unused in this Component since it works with revision
+
+### URLs
+
+GH_REPO=dstnbrkr/VCRURLConnection
+REVISION=7c781bc81b60b079251e94c5ff5e966a0791abd2
+
+COMPONENT_ZIPBALL_URL=https://github.com/dstnbrkr/VCRURLConnection/archive/$(REVISION).zip
+
+### Paths
+
+COMPONENTS_BUILD_CACHE_PATH ?= $(HOME)/Library/Caches/Components
+COMPONENTS_INSTALL_PATH ?= ./Components
+
+COMPONENT_BUILD_PATH=$(COMPONENTS_BUILD_CACHE_PATH)/$(NAME)
+COMPONENT_ZIPBALL_PATH=$(COMPONENT_BUILD_PATH)/$(NAME)-$(REVISION).zip
+COMPONENT_SOURCE_PATH=$(COMPONENT_BUILD_PATH)/$(NAME)-$(REVISION)
+COMPONENT_XCODEPROJ_PATH=$(COMPONENT_SOURCE_PATH)/$(NAME)-$(REVISION)/VCRURLConnection.xcodeproj
+COMPONENT_ARTEFACT_PATH=$(COMPONENT_SOURCE_PATH)/Artefacts/VCRURLConnection
+
+COMPONENT_INSTALL_PATH=$(COMPONENTS_INSTALL_PATH)/$(NAME)
+
+### Targets
+
+.PHONY: install update uninstall clean prepare purge
+
+install: $(COMPONENT_INSTALL_PATH)
+
+uninstall:
+	rm -rf $(COMPONENT_INSTALL_PATH)
+
+update: uninstall install
+
+clean:
+	rm -rf $(COMPONENT_SOURCE_PATH)
+	rm -rf $(COMPONENT_ZIPBALL_PATH)
+
+purge: uninstall clean
+
+### Artefacts
+
+$(COMPONENT_INSTALL_PATH): $(COMPONENT_ARTEFACT_PATH)
+	mkdir -p $(COMPONENT_INSTALL_PATH)/$(NAME)
+
+	cp -Rv $(COMPONENT_ARTEFACT_PATH)/include/VCRURLConnection/* $(COMPONENT_INSTALL_PATH)/$(NAME)
+	cp -Rv $(COMPONENT_ARTEFACT_PATH)/libVCRURLConnection.a $(COMPONENT_INSTALL_PATH)/$(NAME)
+
+$(COMPONENT_ARTEFACT_PATH): $(COMPONENT_SOURCE_PATH)
+	xcodebuild \
+		ONLY_ACTIVE_ARCH=NO \
+		CONFIGURATION_BUILD_DIR=$(COMPONENT_ARTEFACT_PATH) \
+		-project $(COMPONENT_XCODEPROJ_PATH) \
+		-configuration Debug \
+		-sdk iphonesimulator \
+		-arch "i386" -arch "x86_64" \
+		clean build
+
+$(COMPONENT_SOURCE_PATH): $(COMPONENT_ZIPBALL_PATH)
+	unzip $(COMPONENT_ZIPBALL_PATH) -d $(COMPONENT_SOURCE_PATH)
+
+	# Unzipping touches $(COMPONENT_BUILD_PATH)
+	# so we must touch zipball and then source path to restore logical order
+	touch $(COMPONENT_ZIPBALL_PATH)
+	touch $(COMPONENT_SOURCE_PATH)
+
+$(COMPONENT_ZIPBALL_PATH): $(COMPONENT_BUILD_PATH)
+	wget --no-use-server-timestamps $(COMPONENT_ZIPBALL_URL) -O $(COMPONENT_ZIPBALL_PATH)
+
+$(COMPONENT_BUILD_PATH):
+	mkdir $(COMPONENT_BUILD_PATH)
+

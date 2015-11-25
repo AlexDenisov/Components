@@ -1,7 +1,7 @@
 ### Variables
 
 ##### Local
-readonly COMPONENTS_VERSION=0.1.1
+readonly COMPONENTS_VERSION=0.2.0
 readonly COMPONENTS_TEMP_PATH=/tmp/components
 readonly SCRIPT_NAME=$0
 
@@ -55,12 +55,21 @@ Directories:
   COMPONENTS_BUILD_CACHE_PATH   - stores zip/tarballs, built artefacts, or source code of used components
                                 $COMPONENTS_BUILD_CACHE_PATH
 
+Debugging:
+  Set environment variable 'DEBUG' to 'YES' to enable debugging output.
+  It will run make with additional parameters '-r -d' and will send output to 'STDOUT'.
+
+  From 'man make':
+    -d  Print debugging information in addition to normal processing.
+    -r  Eliminate use of the built−in implicit rules.
+
 Examples:
   $SCRIPT_NAME install                # installs every component in the components directory (COMPONENTS_MAKE_PATH)
   $SCRIPT_NAME purge Cedar            # cleans and uninstalls Cedar library
   $SCRIPT_NAME update BloodMagic      # uninstalls current and installs new version of BloodMagic library
   $SCRIPT_NAME clean BloodMagic Cedar # cleans up Cedar' and BloodMagic' artefacts
   $SCRIPT_NAME explain install        # prints commands that would be executed to install each component
+  DEBUG=YES $SCRIPT_NAME install      # prints additional information to 'STDOUT'
 EOL
 }
 
@@ -119,17 +128,22 @@ function main() {
 
   for component in $components; do
     logfile=$COMPONENTS_TEMP_PATH/$component.log
-    make_flags="--warn-undefined-variables"
+    make_flags=" --warn-undefined-variables "
     executing_message="[$command] $component:"
     success_message=" done.\n"
     failure_message=" failed. See $logfile for details.\n"
 
     if [[ $explain -eq 1 ]]; then
       logfile=/dev/stdout
-      make_flags="-n "$make_flags
+      make_flags=" -n "$make_flags
       executing_message="$executing_message\n"
       success_message=""
       failure_message=""
+    fi
+
+    if [[ ! -z "$DEBUG" ]]; then
+      logfile=/dev/stdout
+      make_flags=" -r -d "$make_flags
     fi
 
     make_parameters="$command $make_flags -f $COMPONENTS_MAKE_PATH/$component.make"

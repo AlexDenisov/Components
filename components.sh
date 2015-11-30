@@ -8,7 +8,7 @@ readonly SCRIPT_NAME=$0
 ##### Global
 readonly export COMPONENTS_BUILD_CACHE_PATH=$HOME/Library/Caches/Components
 readonly export COMPONENTS_PATH=$PWD/Components
-readonly export COMPONENTS_MAKE_PATH=$PWD/Components.make
+readonly export COMPONENTS_MAKE_PATH=${COMPONENTS_MAKE_PATH:-$PWD/Components.make}
 
 ### Messages
 

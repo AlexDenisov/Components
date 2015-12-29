@@ -1,2 +1,3 @@
 Components/
-
+target/
+*.swp

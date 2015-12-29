@@ -1,0 +1,14 @@
+[package]
+
+name = "components"
+version = "0.3.0-rc.1"
+authors = [ "Alexey Denisov <1101.debian@gmail.com>", "Stanislav Pankevich <s.pankevich@gmail.com>" ]
+
+[[bin]]
+name = "components"
+path = "src/components.rs"
+test = false
+
+[dev-dependencies]
+tempdir = "*"
+

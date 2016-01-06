@@ -4,13 +4,21 @@
 
 ### About
 
-Components is a concept aimed to solve a problem of dependency management for long-running projects.
+Components is a bare-bones dependency management system: dependencies are called "components", each component has its build rules in its own .make file, `components` driver enumerates all .make files by running Make on them and that installs all components in a way that you explicitly prescribed.
+
+The concept is inspired by [FreeBSD Ports](https://en.wikipedia.org/wiki/FreeBSD_Ports).
 
 Work in progress, here are two articles where you can find more information:
 
 [Components: taking a step back from Dependency Management](http://lowlevelbits.org/components-management)
 
 [How to build a static iOS framework and distribute it as a Component using Make](http://stanislaw.github.io/2015/11/23/how-to-build-static-framework-using-make.html)
+
+### Installation
+
+```bash
+brew install alexdenisov/components/components
+```
 
 ### Contribution
 

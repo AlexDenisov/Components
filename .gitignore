@@ -1,2 +1,5 @@
 Components/
+target/
+*.swp
+distribution/
 

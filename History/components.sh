@@ -7,7 +7,7 @@ readonly SCRIPT_NAME=$0
 
 ##### Global
 readonly export COMPONENTS_BUILD_CACHE_PATH=$HOME/Library/Caches/Components
-readonly export COMPONENTS_PATH=$PWD/Components
+readonly export COMPONENTS_INSTALL_PATH=$PWD/Components
 readonly export COMPONENTS_MAKE_PATH=${COMPONENTS_MAKE_PATH:-$PWD/Components.make}
 
 ### Messages
@@ -33,8 +33,8 @@ Usage:
 
   command:
     install   - downloads, builds (if needed) and installs component 
-                into a vendor directory (COMPONENTS_PATH)
-    uninstall - removes component from a vendor directory (COMPONENTS_PATH)
+                into a vendor directory (COMPONENTS_INSTALL_PATH)
+    uninstall - removes component from a vendor directory (COMPONENTS_INSTALL_PATH)
     clean     - removes downloaded files and built artefacts from 
                 cache dir (COMPONENTS_BUILD_CACHE_PATH)
     purge     - cleans and uninstalls component
@@ -50,8 +50,8 @@ Usage:
 Directories:
   COMPONENTS_MAKE_PATH          - directory contains all components used in the current project
                                 $COMPONENTS_MAKE_PATH
-  COMPONENTS_PATH               - directory contains all installed components for the current project
-                                $COMPONENTS_PATH
+  COMPONENTS_INSTALL_PATH       - directory contains all installed components for the current project
+                                $COMPONENTS_INSTALL_PATH
   COMPONENTS_BUILD_CACHE_PATH   - stores zip/tarballs, built artefacts, or source code of used components
                                 $COMPONENTS_BUILD_CACHE_PATH
 
@@ -87,7 +87,7 @@ function show_usage_and_die() {
 
 function prepare_directories() {
   mkdir -p $COMPONENTS_BUILD_CACHE_PATH
-  mkdir -p $COMPONENTS_PATH
+  mkdir -p $COMPONENTS_INSTALL_PATH
   mkdir -p $COMPONENTS_TEMP_PATH
   mkdir -p $COMPONENTS_MAKE_PATH
 }

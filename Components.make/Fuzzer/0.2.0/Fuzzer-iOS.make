@@ -1,5 +1,5 @@
-NAME=Fuzzer-OSX
-VERSION=0.1.0
+NAME=Fuzzer-iOS
+VERSION=0.2.0
 
 GH_REPO=AlexDenisov/Fuzzer
 ZIPBALL_URL=https://github.com/$(GH_REPO)/releases/download/$(VERSION)/$(NAME)-$(VERSION).zip

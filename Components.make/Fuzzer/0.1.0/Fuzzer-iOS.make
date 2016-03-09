@@ -1,4 +1,4 @@
-NAME=Fuzzer-iPhoneSimulator
+NAME=Fuzzer-iOS
 VERSION=0.1.0
 
 GH_REPO=AlexDenisov/Fuzzer

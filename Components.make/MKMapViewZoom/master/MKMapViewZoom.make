@@ -39,12 +39,10 @@ $(COMPONENT_INSTALL_PATH): $(COMPONENT_SOURCE_PATH)
 
 	cp -Rv $(COMPONENT_SOURCE_PATH)/MKMapView+ZoomLevel.[hm] $(COMPONENT_INSTALL_PATH)
 
-$(COMPONENT_SOURCE_PATH): $(COMPONENT_BUILD_PATH)
+$(COMPONENT_SOURCE_PATH):
+	mkdir -p $(COMPONENT_BUILD_PATH)
 	mkdir -p $(COMPONENT_SOURCE_PATH)
 
 	wget --no-use-server-timestamps $(COMPONENT_URL)/MKMapView+ZoomLevel.h -O $(COMPONENT_SOURCE_PATH)/MKMapView+ZoomLevel.h
 	wget --no-use-server-timestamps $(COMPONENT_URL)/MKMapView+ZoomLevel.m -O $(COMPONENT_SOURCE_PATH)/MKMapView+ZoomLevel.m
-
-$(COMPONENT_BUILD_PATH):
-	mkdir $(COMPONENT_BUILD_PATH)
 

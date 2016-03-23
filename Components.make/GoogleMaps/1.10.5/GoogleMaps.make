@@ -36,21 +36,14 @@ purge: uninstall clean
 ### Artefacts
 
 $(COMPONENT_INSTALL_PATH): $(COMPONENT_SOURCE_PATH)
-	mkdir $(COMPONENT_INSTALL_PATH)
+	mkdir -p $(COMPONENT_INSTALL_PATH)
 	cp -R $(COMPONENT_FRAMEWORK_PATH) $(COMPONENT_INSTALL_PATH)
 
 $(COMPONENT_SOURCE_PATH): $(COMPONENT_TARBALL_PATH)
 	mkdir -p $(COMPONENT_SOURCE_PATH)
 	tar xzf $(COMPONENT_TARBALL_PATH) --directory ${COMPONENT_SOURCE_PATH}
 
-	# Un-tar touches $(COMPONENT_BUILD_PATH)
-	# so we must touch tarball and then source path to restore logical order
-	touch $(COMPONENT_TARBALL_PATH)
-	touch $(COMPONENT_SOURCE_PATH)
-
-$(COMPONENT_TARBALL_PATH): $(COMPONENT_BUILD_PATH)
-	wget --no-use-server-timestamps $(COMPONENT_TARBALL_URL) -O $(COMPONENT_TARBALL_PATH)
-
-$(COMPONENT_BUILD_PATH):
+$(COMPONENT_TARBALL_PATH):
 	mkdir -p $(COMPONENT_BUILD_PATH)
+	wget --no-use-server-timestamps $(COMPONENT_TARBALL_URL) -O $(COMPONENT_TARBALL_PATH)
 

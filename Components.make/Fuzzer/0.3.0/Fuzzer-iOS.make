@@ -42,14 +42,9 @@ $(COMPONENT_INSTALL_PATH): $(COMPONENT_FRAMEWORK_PATH)
 
 $(COMPONENT_FRAMEWORK_PATH): $(COMPONENT_ZIPBALL_PATH)
 	unzip $(COMPONENT_ZIPBALL_PATH) -d $(COMPONENT_SOURCE_PATH)
-	
-	# Unzipping touches $(COMPONENT_BUILD_PATH)
-	# so we must touch zipball and then source path to restore logical order
-	touch $(COMPONENT_ZIPBALL_PATH)
 	touch $(COMPONENT_FRAMEWORK_PATH)
 
 $(COMPONENT_ZIPBALL_PATH):
 	mkdir -p $(COMPONENT_BUILD_PATH)
-
 	wget --no-use-server-timestamps $(ZIPBALL_URL) -O $(COMPONENT_ZIPBALL_PATH)
 

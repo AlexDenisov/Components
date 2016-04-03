@@ -16,9 +16,13 @@ Work in progress, here are two articles where you can find more information:
 
 ### Installation
 
+Components driver is written in Rust programming language and is installed via:
+
 ```bash
 brew install alexdenisov/components/components
 ```
+
+If you don't want your project to be dependent on external tool you may use original [156-lines driver written in Bash](https://github.com/AlexDenisov/Components/blob/master/History/components.sh) that you can store in a root of your project.
 
 ### Contribution
 

@@ -2,7 +2,7 @@
 // This is not Rust-way, but makes code readable where we interface with Make
 #![allow(non_snake_case)]
 
-static COMPONENTS_VERSION: &'static str = "0.3.0";
+static COMPONENTS_VERSION: &'static str = env!("CARGO_PKG_VERSION");
 static COMPONENTS_DATE:    &'static str = "2015-12-31";
 
 use std::process;

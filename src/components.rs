@@ -3,7 +3,7 @@
 #![allow(non_snake_case)]
 
 static COMPONENTS_VERSION: &'static str = env!("CARGO_PKG_VERSION");
-static COMPONENTS_DATE:    &'static str = "2015-12-31";
+static COMPONENTS_DATE:    &'static str = "2016-04-20";
 
 use std::env;
 use std::fs;

@@ -1,7 +1,7 @@
 [package]
 
 name = "components"
-version = "0.3.0-rc.2"
+version = "0.3.0"
 authors = [ "Alexey Denisov <1101.debian@gmail.com>", "Stanislav Pankevich <s.pankevich@gmail.com>" ]
 
 [[bin]]

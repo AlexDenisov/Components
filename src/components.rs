@@ -5,12 +5,13 @@
 static COMPONENTS_VERSION: &'static str = env!("CARGO_PKG_VERSION");
 static COMPONENTS_DATE:    &'static str = "2015-12-31";
 
-use std::process;
-use std::process::Command;
-use std::process::Stdio;
 use std::env;
 use std::fs;
 use std::fs::File;
+use std::io::Write;
+use std::process;
+use std::process::Command;
+use std::process::Stdio;
 use std::os::unix::prelude::*;
 
 fn main() {
@@ -213,6 +214,8 @@ fn main() {
             };
 
             print!("[{}] {}:", command, component_name);
+
+            std::io::stdout().flush().unwrap();
 
             let status = Command::new("make")
                 .arg(&command)
